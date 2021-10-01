@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
@@ -44,7 +44,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void DoMove()
-    {
+    {   
+        public GameObject
         Vector2 velocity = rb.velocity;
 
         // stop player sliding when not pressing left or right
@@ -69,15 +70,5 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void FlipSpriteLeft( bool left )
-    {
-        if( left == true )
-        {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
-    }
+
 }
