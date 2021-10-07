@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
         // From our condition we set up above we said that if "speed">5 then set the animation to "player_Walk"
         DoJump();
         DoMove();
-
     }
 
     void DoJump()
@@ -70,4 +69,5 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = velocity;
 
     }
+
 }
