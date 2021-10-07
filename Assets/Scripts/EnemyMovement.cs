@@ -23,26 +23,7 @@ public class EnemyMovement : MonoBehaviour
         // Add this in update()
         // this sets the variable to 10
         // From our condition we set up above we said that if "speed">5 then set the animation to "player_Walk"
-        DoJump();
         DoMove();
-
-    }
-
-    void DoJump()
-    {
-        Vector2 velocity = rb.velocity;
-
-        // check for jump
-        if (Input.GetKey("space"))
-        {
-            if (velocity.y < 0.01f)
-            {
-                velocity.y = 7f;    // give the player a velocity of 5 in the y axis
-
-            }
-        }
-
-        rb.velocity = velocity;
 
     }
 
@@ -52,45 +33,33 @@ public class EnemyMovement : MonoBehaviour
         playerpos = GameObject.Find("Player").transform.position.x;
         enemypos = transform.position.x;
 
-        Debug.Log(playerpos);
-
         Vector2 velocity = rb.velocity;
-
         float distance = enemypos - playerpos;
 
         // stop player sliding when not pressing left or right
         velocity.x = 0;
         anim.SetBool("Walk", false);
         // check for moving left
-        if (distance <-20)
+        if (distance <20 && distance >2)
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
-            FlipSpriteLeft();
-            velocity.x = -6;
+            Flipper.FlipSprite(gameObject, true);
+            velocity.x = -5;
+            distance = enemypos - playerpos;
+            
         }
 
         // check for moving right
-        if (distance <20)
+        if (distance >-20 && distance <-2) 
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
-            FlipSpriteLeft();
-            velocity.x = 6;
+            Flipper.FlipSprite(gameObject, false);
+            velocity.x = 5;
+            distance = enemypos - playerpos;
         }
         rb.velocity = velocity;
 
-    }
-
-    void FlipSpriteLeft()
-    {
-        if (anim.GetBool("left") == true )
-        {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
     }
 }

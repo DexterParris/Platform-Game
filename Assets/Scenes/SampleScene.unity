@@ -6305,7 +6305,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1538014165}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ac5d71420a55d584a8e50092c8a5ffd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -6524,7 +6524,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1566814670}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ac5d71420a55d584a8e50092c8a5ffd3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -6564,5 +6564,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9773139d3547d3440b2e2a02c45a0e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerpos: {x: 0, y: 0, z: 0}
-  enemypos: {x: 0, y: 0, z: 0}
+  playerpos: 0
+  enemypos: 0

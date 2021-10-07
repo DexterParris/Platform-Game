@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
-            FlipSpriteLeft();
+            Flipper.FlipSprite(gameObject, true);
             velocity.x = -6;
         }
 
@@ -64,22 +64,10 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
-            FlipSpriteLeft();
+            Flipper.FlipSprite(gameObject, false);    //flip sprite left
             velocity.x = 6;
         }
         rb.velocity = velocity;
 
-    }
-
-    void FlipSpriteLeft()
-    {
-        if (anim.GetBool("left") == true )
-        {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
     }
 }
