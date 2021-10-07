@@ -24,7 +24,6 @@ public class EnemyMovement : MonoBehaviour
         // this sets the variable to 10
         // From our condition we set up above we said that if "speed">5 then set the animation to "player_Walk"
         DoMove();
-
     }
 
     void DoMove()
@@ -40,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
         velocity.x = 0;
         anim.SetBool("Walk", false);
         // check for moving left
-        if (distance <20 && distance >2)
+        if (distance <15 && distance >1.5f)
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
@@ -51,7 +50,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         // check for moving right
-        if (distance >-20 && distance <-2) 
+        if (distance >-15 && distance <-1.5f) 
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
