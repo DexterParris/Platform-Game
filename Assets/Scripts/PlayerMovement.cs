@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 velocity = rb.velocity;
 
         // check for jump
-        if (Input.GetKey("space"))
+        if (Input.GetKeyDown("space"))
         {
             if (velocity.y < 0.01f)
             {
@@ -56,8 +56,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
-            anim.SetBool("right", false);
-            Flipper.FlipSprite(gameObject, true);
+            Helper.FlipSprite(gameObject, true);
             velocity.x = -6;
         }
 
@@ -66,8 +65,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
-            anim.SetBool("right", true);
-            Flipper.FlipSprite(gameObject, false);    //flip sprite left
+            Helper.FlipSprite(gameObject, false);    //flip sprite left
             velocity.x = 6;
         }
         rb.velocity = velocity;
@@ -77,30 +75,17 @@ public class PlayerMovement : MonoBehaviour
 
     void DoShoot()
     {
-        if (Input.GetKey("s"))
+
+        if (Input.GetKeyDown("s"))
         {
             float xpos = transform.position.x;
-            float ypos = transform.position.y + 1;
-            float xvel = 0;
+            float ypos = transform.position.y;
+            float xvel = 7;
             float yvel = 0;
-        
-            GameObject instance = Instantiate(prefab, new Vector3(xpos, ypos, 0), Quaternion.identity);
 
-            if (anim.GetBool("left") == true)
-            {
-                xvel = -7;
-                Flipper.FlipSprite(instance, true);
-
-            }
-            else
-            {
-                xvel = 7;
-                Flipper.FlipSprite(instance, false);
-            }
-            
-            Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector3(xvel, yvel, 0);
+            Helper.MakeBullet(prefab, xpos + 1, ypos + 1, xvel, yvel, anim.GetBool("left"));
 
         }
     }
+
 }

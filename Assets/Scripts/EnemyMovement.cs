@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
-            Flipper.FlipSprite(gameObject, true);
+            Helper.FlipSprite(gameObject, true);
             velocity.x = -5;
             distance = enemypos - playerpos;
         }
@@ -53,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
-            Flipper.FlipSprite(gameObject, false);
+            Helper.FlipSprite(gameObject, false);
             velocity.x = 5;
             distance = enemypos - playerpos;
         }
