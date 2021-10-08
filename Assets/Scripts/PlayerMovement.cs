@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    public GameObject prefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         // From our condition we set up above we said that if "speed">5 then set the animation to "player_Walk"
         DoJump();
         DoMove();
+        DoShoot();
     }
 
     void DoJump()
@@ -54,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
+            anim.SetBool("right", false);
             Flipper.FlipSprite(gameObject, true);
             velocity.x = -6;
         }
@@ -63,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
+            anim.SetBool("right", true);
             Flipper.FlipSprite(gameObject, false);    //flip sprite left
             velocity.x = 6;
         }
@@ -70,4 +74,33 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
+    void DoShoot()
+    {
+        if (Input.GetKey("s"))
+        {
+            float xpos = transform.position.x;
+            float ypos = transform.position.y + 1;
+            float xvel = 0;
+            float yvel = 0;
+        
+            GameObject instance = Instantiate(prefab, new Vector3(xpos, ypos, 0), Quaternion.identity);
+
+            if (anim.GetBool("left") == true)
+            {
+                xvel = -7;
+                Flipper.FlipSprite(instance, true);
+
+            }
+            else
+            {
+                xvel = 7;
+                Flipper.FlipSprite(instance, false);
+            }
+            
+            Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+            rb.velocity = new Vector3(xvel, yvel, 0);
+
+        }
+    }
 }

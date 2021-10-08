@@ -39,18 +39,17 @@ public class EnemyMovement : MonoBehaviour
         velocity.x = 0;
         anim.SetBool("Walk", false);
         // check for moving left
-        if (distance <15 && distance >1.5f)
+        if (distance <10 && distance >1.5f)
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
             Flipper.FlipSprite(gameObject, true);
             velocity.x = -5;
             distance = enemypos - playerpos;
-            
         }
 
         // check for moving right
-        if (distance >-15 && distance <-1.5f) 
+        if (distance >-10 && distance <-1.5f) 
         {
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
