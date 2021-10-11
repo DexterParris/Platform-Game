@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 776945722}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 796112114}
   m_Layer: 0
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10191,7 +10191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1022900367492353655, guid: 1cf9022d6adb3944daf9f9306541fb11, type: 3}
-  velobject: {fileID: 1538014165}
+  character: {fileID: 1538014165}
 --- !u!1001 &1744885955
 PrefabInstance:
   m_ObjectHideFlags: 0

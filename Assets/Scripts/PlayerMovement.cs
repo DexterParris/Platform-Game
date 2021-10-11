@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     public GameObject prefab;
-    public GameObject velobject;
+    public GameObject character;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,15 +29,20 @@ public class PlayerMovement : MonoBehaviour
 
     void DoJump()
     {
+        bool IsGrounded = false;
+        float xpos = transform.position.x;
+        float ypos = transform.position.y;
+
+        Helper.DoRayCollisionCheck(character, xpos, ypos, IsGrounded);
         Vector2 velocity = rb.velocity;
 
         // check for jump
         if (Input.GetKeyDown("space"))
         {
-            if (velocity.y < 0.01f)
+            if (IsGrounded == true)
             {
-                yvelocity = 7f;    // give the player a velocity of 7 in the y axis
-                Helper.SetVelocity(velobject, xvelocity, yvelocity);
+                print("grounded");
+                velocity.y = 7f;    // give the player a velocity of 7 in the y axis
             }
         }
 
@@ -47,9 +52,10 @@ public class PlayerMovement : MonoBehaviour
 
     void DoMove()
     {
+        
         float xvelocity = 0;
         float yvelocity = 0;
-        Helper.SetVelocity(velobject, xvelocity, yvelocity);
+        Helper.SetVelocity(character, xvelocity, yvelocity);
         Vector2 velocity = rb.velocity;
 
         // stop player sliding when not pressing left or right
@@ -63,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
             Helper.FlipSprite(gameObject, true);
-            Helper.SetVelocity(velobject, xvelocity, yvelocity);
+            Helper.SetVelocity(character, xvelocity, yvelocity);
         }
 
         // check for moving right
@@ -74,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
             Helper.FlipSprite(gameObject, false);    //flip sprite left
-            Helper.SetVelocity(velobject, xvelocity, yvelocity);
+            Helper.SetVelocity(character, xvelocity, yvelocity);
         }
 
     }

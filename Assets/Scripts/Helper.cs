@@ -28,9 +28,9 @@ public class Helper : MonoBehaviour
             return Right;
     }
 
-    public static void SetVelocity( GameObject velobject, float xvelocity, float yvelocity )
+    public static void SetVelocity( GameObject character, float xvelocity, float yvelocity )
     {
-        Rigidbody2D rb = velobject.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = character.GetComponent<Rigidbody2D>();
         Vector2 velocity = rb.velocity;
         velocity.x = xvelocity;
         velocity.y = yvelocity;
@@ -61,5 +61,40 @@ public class Helper : MonoBehaviour
         Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector3( xvel, yvel, 0 );   
     }
-    
+
+    public static void DoRayCollisionCheck(GameObject character, float xpos, float ypos, bool IsGrounded)
+    {
+        float rayLength = 1.0f;
+
+        Vector3 position = new Vector3(xpos, ypos, 0);
+
+        //cast a ray downward of length 1
+        RaycastHit2D hit = Physics2D.Raycast(position, -Vector2.up, rayLength);
+
+        Color hitColor = Color.white;
+
+
+        if (hit.collider != null)
+        {
+
+            if (hit.collider.tag == "Enemy")
+            {
+                hitColor = Color.red;
+            }
+
+            if (hit.collider.tag == "Ground")
+            {
+                hitColor = Color.green;
+                IsGrounded = true;
+                return;
+            }
+        }
+        // draw a debug ray to show ray position
+        // You need to enable gizmos in the editor to see these
+        Debug.DrawRay(position, -Vector2.up * rayLength, hitColor);
+
+    }
+
+
+
 }
