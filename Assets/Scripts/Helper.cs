@@ -31,10 +31,17 @@ public class Helper : MonoBehaviour
     public static void SetVelocity( GameObject character, float xvelocity, float yvelocity )
     {
         Rigidbody2D rb = character.GetComponent<Rigidbody2D>();
-        Vector2 velocity = rb.velocity;
-        velocity.x = xvelocity;
-        velocity.y = yvelocity;
-        rb.velocity = velocity;
+
+        if( xvelocity == 0 )
+        {
+            rb.velocity = new Vector2(rb.velocity.x, yvelocity);
+        }
+
+        if (yvelocity == 0)
+        {
+            rb.velocity = new Vector2(xvelocity, rb.velocity.y);
+        }
+
 
     }
 
@@ -64,7 +71,7 @@ public class Helper : MonoBehaviour
 
     public static void DoRayCollisionCheck(GameObject character, float xpos, float ypos, bool IsGrounded)
     {
-        float rayLength = 1.0f;
+        float rayLength = 0.2f;
 
         Vector3 position = new Vector3(xpos, ypos, 0);
 
@@ -73,22 +80,19 @@ public class Helper : MonoBehaviour
 
         Color hitColor = Color.white;
 
-
+        IsGrounded = false;
         if (hit.collider != null)
         {
 
-            if (hit.collider.tag == "Enemy")
+            
+            if (hit.collider.tag == "Ground")
             {
+                IsGrounded = true;
                 hitColor = Color.red;
             }
 
-            if (hit.collider.tag == "Ground")
-            {
-                hitColor = Color.green;
-                IsGrounded = true;
-                return;
-            }
         }
+        
         // draw a debug ray to show ray position
         // You need to enable gizmos in the editor to see these
         Debug.DrawRay(position, -Vector2.up * rayLength, hitColor);
