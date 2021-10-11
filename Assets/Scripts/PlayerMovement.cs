@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     public GameObject prefab;
+    public GameObject velobject;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (velocity.y < 0.01f)
             {
-                velocity.y = 7f;    // give the player a velocity of 5 in the y axis
-
+                yvelocity = 7f;    // give the player a velocity of 7 in the y axis
+                Helper.SetVelocity(velobject, xvelocity, yvelocity);
             }
         }
 
@@ -46,29 +47,35 @@ public class PlayerMovement : MonoBehaviour
 
     void DoMove()
     {
+        float xvelocity = 0;
+        float yvelocity = 0;
+        Helper.SetVelocity(velobject, xvelocity, yvelocity);
         Vector2 velocity = rb.velocity;
 
         // stop player sliding when not pressing left or right
-        velocity.x = 0;
+        xvelocity = 0;
         anim.SetBool("Walk", false);
         // check for moving left
         if (Input.GetKey("a"))
         {
+            xvelocity = -6;
+            yvelocity = 0;
             anim.SetBool("Walk", true);
             anim.SetBool("left", true);
             Helper.FlipSprite(gameObject, true);
-            velocity.x = -6;
+            Helper.SetVelocity(velobject, xvelocity, yvelocity);
         }
 
         // check for moving right
         if (Input.GetKey("d"))
         {
+            xvelocity = 6;
+            yvelocity = 0;
             anim.SetBool("Walk", true);
             anim.SetBool("left", false);
             Helper.FlipSprite(gameObject, false);    //flip sprite left
-            velocity.x = 6;
+            Helper.SetVelocity(velobject, xvelocity, yvelocity);
         }
-        rb.velocity = velocity;
 
     }
 
@@ -83,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             float xvel = 7;
             float yvel = 0;
 
-            Helper.MakeBullet(prefab, xpos + 1, ypos + 1, xvel, yvel, anim.GetBool("left"));
+            Helper.MakeBullet(prefab, xpos + 1, ypos + 1, xvel, yvel, anim.GetBool("left")); //instantiate the object using the instantiation method in the helper.cs script
 
         }
     }

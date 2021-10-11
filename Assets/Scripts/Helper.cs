@@ -28,6 +28,16 @@ public class Helper : MonoBehaviour
             return Right;
     }
 
+    public static void SetVelocity( GameObject velobject, float xvelocity, float yvelocity )
+    {
+        Rigidbody2D rb = velobject.GetComponent<Rigidbody2D>();
+        Vector2 velocity = rb.velocity;
+        velocity.x = xvelocity;
+        velocity.y = yvelocity;
+        rb.velocity = velocity;
+
+    }
+
 
     public static void MakeBullet( GameObject prefab,  float xpos, float ypos, float xvel, float yvel, bool left )
     {
@@ -49,8 +59,7 @@ public class Helper : MonoBehaviour
 
         // set the velocity of the instantiated object
         Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector3( xvel, yvel, 0 );
-            
+        rb.velocity = new Vector3( xvel, yvel, 0 );   
     }
     
 }
