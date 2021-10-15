@@ -83,12 +83,11 @@ public class Helper : MonoBehaviour
         IsGrounded = false;
         if (hit.collider != null)
         {
-
-            
             if (hit.collider.tag == "Ground")
             {
                 IsGrounded = true;
                 hitColor = Color.red;
+                return;
             }
 
         }

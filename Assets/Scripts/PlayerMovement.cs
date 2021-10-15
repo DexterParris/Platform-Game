@@ -38,11 +38,11 @@ public class PlayerMovement : MonoBehaviour
         // check for jump
         if (Input.GetKeyDown("space"))
         {
-            Helper.SetVelocity(gameObject, 0, 10);
-
+            if(IsGrounded == true)
+            {
+                Helper.SetVelocity(gameObject, 0, 7);
+            }
         }
-
-
     }
 
     void DoMove()
