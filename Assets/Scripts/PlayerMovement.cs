@@ -32,13 +32,13 @@ public class PlayerMovement : MonoBehaviour
         float yvelocity = rb.velocity.y;
         float xvelocity = rb.velocity.x;
 
-        Helper.DoRayCollisionCheck(character, xpos, ypos, IsGrounded);
+        Helper.DoRayCollisionCheck(character, xpos, ypos, false);
        
 
         // check for jump
         if (Input.GetKeyDown("space"))
         {
-            if(IsGrounded == true)
+            if (IsGrounded == true)
             {
                 Helper.SetVelocity(gameObject, 0, 7);
             }

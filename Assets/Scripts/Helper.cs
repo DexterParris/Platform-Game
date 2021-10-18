@@ -72,26 +72,22 @@ public class Helper : MonoBehaviour
     public static void DoRayCollisionCheck(GameObject character, float xpos, float ypos, bool IsGrounded)
     {
         float rayLength = 0.2f;
-
         Vector3 position = new Vector3(xpos, ypos, 0);
 
         //cast a ray downward of length 1
         RaycastHit2D hit = Physics2D.Raycast(position, -Vector2.up, rayLength);
 
-        Color hitColor = Color.white;
+        Color hitColor = Color.red;
 
-        IsGrounded = false;
         if (hit.collider != null)
         {
             if (hit.collider.tag == "Ground")
             {
                 IsGrounded = true;
-                hitColor = Color.red;
-                return;
+                hitColor = Color.green;
             }
 
         }
-        
         // draw a debug ray to show ray position
         // You need to enable gizmos in the editor to see these
         Debug.DrawRay(position, -Vector2.up * rayLength, hitColor);
